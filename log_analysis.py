@@ -55,10 +55,10 @@ result = c.fetchall()
 print("\nOn which days did more than 1% of requests lead to errors")
 
 for i in range(len(result)):
-    print("\n\t" + datetime.strptime(str(result[i][0]), "%Y-%m-%d").strftime("%B %d, %Y") +
-    " - " + str("{:0.1f}".format(result[i][1])) + "% errors")
-
-
+    print(
+        "\n\t" + datetime.strptime(str(result[i][0]), "%Y-%m-%d")
+        .strftime("%B %d, %Y") + " - " + str("{:0.1f}".format(result[i][1])) +
+        "% errors")
 
 db.commit()
 db.close()
