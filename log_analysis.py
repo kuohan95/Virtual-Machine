@@ -12,12 +12,15 @@ c = db.cursor()
 # Query 1
 # To find three most popular articles of all time
 c.execute("""
-SELECT articles.title, COUNT(*) AS num
-FROM articles, log
-WHERE log.path = '/article/' || articles.slug
-GROUP BY articles.title
-ORDER BY num DESC
-LIMIT 3;
+SELECT title, views
+FROM articles
+INNER JOIN
+    (SELECT path, count(path) AS views
+    FROM log
+    GROUP BY log.path) AS log
+    ON log.path = '/article/' || articles.slug
+    ORDER BY views DESC
+    LIMIT 3;
 """)
 result = c.fetchall()
 print("What are the most popular three articles of all time?")
