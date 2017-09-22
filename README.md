@@ -32,10 +32,12 @@ This project makes use of the same Linux-based virtual machine (VM) as the prece
 
 To load the data we need the [newsdata.zip](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip), cd into the vagrant directory and use the command ```psql -d news -f newsdata.sql```
 
-Once you have the data loaded into your database, connect to your database using ```psql -d news``` and explore the tables using the ```\dt``` and ```\d``` table commands and select statements.
+Once you have the data loaded into your database, connect to your database using ```psql -d news``` and explore the tables using the ```\dt``` and ```\d``` table commands and select statements. 
 
-### After successfully loaded the data. Do include the ```create view``` statements for these views as this program depends on it.
+For easier way of entering the data provided in the repository an sql script called ```create_views.sql```, you could import the views from the command line by typing: psql ```-d news -f create_views.sql```
 
+
+### After successfully loaded the data. Do check if the ```create view``` statements for these views as this program depends on it.
 
 ```sql
 CREATE VIEW failure AS
