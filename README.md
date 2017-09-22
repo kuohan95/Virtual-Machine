@@ -21,42 +21,42 @@ Psycopg2 for python
 
 A step by step series of examples that tell you have to get a development env running
 
-```
-1. Clone or download this repository.
+
+1. Clone or download this [repository](https://github.com/kuohan95/Virtual-Machine.git).  
 2. Unzip to a folder.
-```
+
 
 ## Database load up
 
 This project makes use of the same Linux-based virtual machine (VM) as the preceding lessons on Udacity.
 
-To load the data, cd into the vagrant directory and use the command ```psql -d news -f newsdata.sql```
+To load the data we need the [newsdata.zip](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip), cd into the vagrant directory and use the command ```psql -d news -f newsdata.sql```
 
 Once you have the data loaded into your database, connect to your database using ```psql -d news``` and explore the tables using the ```\dt``` and ```\d``` table commands and select statements.
 
 ### After successfully loaded the data. Do include the ```create view``` statements for these views as this program depends on it.
 
 
-```
+```sql
 CREATE VIEW failure AS
-select DATE(time) as date, count(*) as num
-from log
-where status = '404 NOT FOUND'
-Group by date
-Order by date;
+SELECT DATE(time) AS date, COUNT(*) AS num
+FROM log
+WHERE status = '404 NOT FOUND'
+GROUP by date
+ORDER by date;
 
 CREATE VIEW success AS
-select DATE(time) as date, count(*) as num
-from log
-Group by date
-Order by date;
+SELECT DATE(time) AS date, count(*) AS num
+FROM log
+GROUP BY date
+ORDER BY date;
 
 CREATE VIEW rate AS
-select failure.date , (failure.num::float / success.num::float) * 100 as percentage
-from failure, success
-where failure.date = success.date
-group by success.date, failure.date, failure.num, success.num
-order by failure.date;
+SELECT failure.date , (failure.num::float / success.num::float) * 100 as percentage
+FROM failure, success
+WHERE failure.date = success.date
+GROUP BY success.date, failure.date, failure.num, success.num
+ORDER BY failure.date;
 
 ```
 ## Running python script
