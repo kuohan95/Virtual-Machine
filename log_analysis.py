@@ -22,8 +22,8 @@ LIMIT 3;
 result = c.fetchall()
 print("What are the most popular three articles of all time?")
 
-for i in range(len(result)):
-    print("\n\t" + result[i][0] + " - " + str(result[i][1]) + " views")
+for title, views in result:
+    print('\n\t{} - {} views'.format(title, views))
 
 # Query 2
 # To find the most popular article authors of all time
@@ -38,8 +38,8 @@ ORDER BY num DESC;
 result = c.fetchall()
 print("\nWho are the most popular article authors of all time?")
 
-for i in range(len(result)):
-    print("\n\t" + result[i][0] + " - " + str(result[i][1]) + " views")
+for title, views in result:
+    print('\n\t{} - {} views'.format(title, views))
 
 # Query 3
 # To calculate which days did more than 1% of requests lead to error
@@ -54,11 +54,8 @@ ORDER by date;
 result = c.fetchall()
 print("\nOn which days did more than 1% of requests lead to errors")
 
-for i in range(len(result)):
-    print(
-        "\n\t" + datetime.strptime(str(result[i][0]), "%Y-%m-%d")
-        .strftime("%B %d, %Y") + " - " + str("{:0.1f}".format(result[i][1])) +
-        "% errors")
+for date, error_percent in result:
+    print('\n\t{0:%B %d, %Y} - {1:.1f}% errors'.format(date, error_percent))
 
 db.commit()
 db.close()
