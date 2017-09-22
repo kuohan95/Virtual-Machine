@@ -26,13 +26,15 @@ A step by step series of examples that tell you have to get a development env ru
 2. Unzip to a folder.
 ```
 
-## Running the tests
+## Database load up
 
 This project makes use of the same Linux-based virtual machine (VM) as the preceding lessons on Udacity.
 
 To load the data, cd into the vagrant directory and use the command ```psql -d news -f newsdata.sql```
 
-### After successfully loaded the date. Do include the ```create view``` statements for these views as this program depends on it.
+Once you have the data loaded into your database, connect to your database using ```psql -d news``` and explore the tables using the ```\dt``` and ```\d``` table commands and select statements.
+
+### After successfully loaded the data. Do include the ```create view``` statements for these views as this program depends on it.
 
 
 ```
@@ -57,6 +59,13 @@ group by success.date, failure.date, failure.num, success.num
 order by failure.date;
 
 ```
+## Running python script
+
+After successfully loaded the data run the python script.
+
+1. Navigate to where log_analysis.py is located in vagrant.
+2. Run the following command:
+```python log_analysis.py```
 
 ## Sample Output
 ```
